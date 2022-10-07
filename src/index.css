@@ -12,11 +12,137 @@ code {
     monospace;
 }
 
+/* Result Page styling Start */
+#end{
+  padding-top: 7%
+}
+#result{
+  padding: 30px 20px;
+}
+@media (min-width:1500px) {
+  #end{
+    padding-top: 15%;
+  }
+  #result{
+    width: 25%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:1499px) {
+  #end{
+    padding-top: 20%;
+  }
+  #result{
+    width: 30%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:1199px) {
+  #end{
+    padding-top: 20%;
+  }
+  #result{
+    width: 35%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:950px) {
+  #end{
+    padding-top: 32%;
+  }
+  #result{
+    width: 50%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:600px) {
+  #end{
+    padding-top: 38%;
+  }
+  #result{
+    width: 60%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:500px) {
+  #end{
+    padding-top: 55%;
+  }
+  #result{
+    width: 80%;
+    margin: 0 auto
+  }
+} 
+/* Result Page styling End */
 
-/* #next button{
-  padding: 10px;
-  font-size: 20px;
-} */
+
+/* Front Page styling Start */
+#start{
+  padding-top: 7%
+}
+
+#detail{
+  padding: 30px 20px;
+  /* height:50vh */
+}
+@media (min-width:1500px) {
+  #detail{
+    width: 40%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:1499px) {
+  #detail{
+    width: 50%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:1199px) {
+  #start{
+    padding-top: 10%;
+  }
+  #detail{
+    width: 70%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:950px) {
+  #start{
+    padding-top: 12%;
+  }
+  #detail{
+    width: 70%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:600px) {
+  #start{
+    padding-top: 15%;
+  }
+  #detail{
+    width: 80%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:400px) {
+  #start{
+    padding-top: 20%;
+  }
+  #detail{
+    width: 90%;
+    margin: 0 auto
+  }
+} 
+/* Front Page styling End */
+
+
+
+
+/* Main Page styling Start */
+#question{
+  padding-top: 7%
+}
+
 #main{
   padding: 30px 20px;
   /* height:50vh */
@@ -34,17 +160,43 @@ code {
   }
 } 
 @media (max-width:1199px) {
+  #question{
+    padding-top: 10%;
+  }
+  #main{
+    width: 70%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:950px) {
+  #question{
+    padding-top: 12%;
+  }
   #main{
     width: 70%;
     margin: 0 auto
   }
 } 
 @media (max-width:600px) {
+  #question{
+    padding-top: 15%;
+  }
+  #main{
+    width: 80%;
+    margin: 0 auto
+  }
+} 
+@media (max-width:400px) {
+  #question{
+    padding-top: 20%;
+  }
   #main{
     width: 90%;
     margin: 0 auto
   }
 } 
+/* Main Page styling End */
+
 #options{
   padding: 10px 5px;
   border-radius: 10px;

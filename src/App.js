@@ -71,13 +71,15 @@ function App() {
     },
   ]);
 
+  let [fName, setFName] = useState("");
+  let [lName, setLName] = useState("");
   let [indexNumber, setIndexNumber] = useState(0);
   let [score, setScore] = useState(0);
   let [showResult, setShowResult] = useState(false);
-  let [showQuestions, setShowQuestions] = useState(false)
+  let [showQuestions, setShowQuestions] = useState(false);
 
   let [miliSec, setMiliSec] = useState(0);
-  let [sec, setSec] = useState(4);
+  let [sec, setSec] = useState(9);
   let [min, setMin] = useState(0);
 
   let timer;
@@ -97,19 +99,18 @@ function App() {
 
   let start = () => {
     setMiliSec(59);
-    setSec(4);
-    setShowQuestions(true)
+    setSec(9);
+    setShowQuestions(true);
   };
   let stop = () => {
-    clearInterval(timer)
-    setShowResult(true)
+    clearInterval(timer);
+    setShowResult(true);
   };
   useEffect(() => {
     if (sec === 0 && miliSec === 0) {
       stop();
     }
-  })
-
+  });
 
   let checkQuestion = (a, b) => {
     if (a === b) {
@@ -126,28 +127,52 @@ function App() {
 
   return (
     <div style={{ backgroundColor: "lightBlue", height: "100vh" }}>
-      {showQuestions ?
-        (showResult ?
-          (
-            <>
-              <h1>Total Question : {questions.length}</h1>
-              {/* <h1>No. of questions attempt : {questions.length}</h1> */}
-              <h1>
+      {showQuestions ? (
+        showResult ? (
+          <div id="end">
+            <Box
+              id="result"
+              sx={{
+                bgcolor: "white",
+                boxShadow:
+                  "0 10px 15px rgba(0,0,0,0.25), 0 0 6px rgba(0,0,0,0.22)",
+              }}
+            >
+              <Typography variant="h4" align="center" color="error">
+                <b>
+                  {fName} {lName}
+                </b>
+              </Typography>
+              <Typography variant="h6" align="center" mb={4}>
+                <b>Quiz attempted successfully.</b>
+              </Typography>
+              <Typography variant="h6">
+                Total Question : {questions.length}
+              </Typography>
+              {/* <Typography>No. of questions attempt : {questions.length}</Typography> */}
+              <Typography variant="h6">
                 Correct Answer : {score} / {questions.length}
-              </h1>
-              <h1>Percentage : {Math.round((score * 100) / questions.length)}%</h1>
-            </>
-          ) :
-          (
-            // Main 
+              </Typography>
+              <Typography variant="h6">
+                Percentage : {Math.round((score * 100) / questions.length)}%
+              </Typography>
+              <Typography mt={5} variant="h4" align="center" color="error">
+                <b>{Math.round((score * 100) / questions.length)}% Score</b>
+              </Typography>
+            </Box>
+          </div>
+        ) : (
+          // Main
+          <div id='question' style={{ paddingTop: "7%" }}>
             <Box
               id="main"
               sx={{
+                // paddingTop: '20%',
                 bgcolor: "white",
-                boxShadow: "0 10px 15px rgba(0,0,0,0.25), 0 0 6px rgba(0,0,0,0.22)",
+                boxShadow:
+                  "0 10px 15px rgba(0,0,0,0.25), 0 0 6px rgba(0,0,0,0.22)",
               }}
             >
-              <button>Start</button>
               {/* Time remaining */}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Chip label={`${min} : ${sec}`}></Chip>
@@ -213,49 +238,68 @@ function App() {
                 </Typography>
               </Box>
             </Box>
-          )
+          </div>
         )
-        :
-        (
-          <>
-            <Box
-              id="main"
-              sx={{
-                bgcolor: "white",
-                boxShadow: "0 10px 15px rgba(0,0,0,0.25), 0 0 6px rgba(0,0,0,0.22)",
-              }}
+      ) : (
+        <div id="start">
+          <Box
+            id="detail"
+            sx={{
+              bgcolor: "white",
+              boxShadow:
+                "0 10px 15px rgba(0,0,0,0.25), 0 0 6px rgba(0,0,0,0.22)",
+            }}
+          >
+            <Typography color="error" variant="h2" align="center" mb={4}>
+              <b>Quiz App</b>
+            </Typography>
+            <Typography variant="h6">
+              Total Questions: {questions.length}
+            </Typography>
+            <Typography variant="h6">Time Given: 10 seconds</Typography>
+            <Typography variant="h6">Passing Criteria: Above 60%</Typography>
+            <Typography variant="h6">
+              Note: Each question carry equal marks
+            </Typography>
+            <Typography
+              variant="h6"
+              color="error"
+              my={4}
+              sx={{ fontWeight: "bold" }}
             >
-              <Typography color='error' variant="h2" align='center' mb={4} >
-                <b>Quiz App</b>
-              </Typography>
-              <Typography variant="h6" >
-                Total Questions: {questions.length}
-              </Typography>
-              <Typography variant="h6" >
-                Time Given: 4 seconds
-              </Typography>
-              <Typography variant="h6" >
-                Passing Criteria: Above 60%
-              </Typography>
-              <Typography variant="h6" color='error' my={4} sx={{ fontWeight: 'bold' }} >
-                Please provide your details to start the quiz
-              </Typography>
-              <Box mb={4} align='center'>
-                <TextField size='small' id="standard-basic" label="First Name" variant="outlined" />
-              </Box>
-              <Box align='center'>
-                <TextField size='small' id="standard-basic" label="Last Name" variant="outlined" />
-              </Box>
-              {/* <Typography variant="h6" my={4} >
+              Please provide your details to start the quiz
+            </Typography>
+            <Box mb={4}>
+              <TextField
+                sx={{ width: "100%" }}
+                size="small"
+                id="standard-basic"
+                label="First Name"
+                variant="outlined"
+                onChange={(e) => setFName(e.target.value)}
+              />
+            </Box>
+            <Box>
+              <TextField
+                sx={{ width: "100%" }}
+                size="small"
+                id="standard-basic"
+                label="Last Name"
+                variant="outlined"
+                onChange={(e) => setLName(e.target.value)}
+              />
+            </Box>
+            {/* <Typography variant="h6" my={4} >
                 Click below to start the Quiz
               </Typography> */}
-              <Box my={5} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Button onClick={start} variant='contained' >Click to start Quiz</Button>
-              </Box>
+            <Box my={5} sx={{ display: "flex", justifyContent: "center" }}>
+              <Button onClick={start} variant="contained">
+                Click to start Quiz
+              </Button>
             </Box>
-          </>
-        )
-      }
+          </Box>
+        </div>
+      )}
     </div>
   );
 }
