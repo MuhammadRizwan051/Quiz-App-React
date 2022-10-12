@@ -88,10 +88,12 @@ function App() {
   let [showQuestions, setShowQuestions] = useState(false);
   let [disabled, setDisabled] = useState(true);
   let [name, setName] = useState("");
+  let [questionsLimit, setQuestionsLimit] = useState(0);
 
   let givenMinutes = 0;
   let givenSeconds = 10;
   let givenMiliSeconds = 10;
+  // let questionsLimit  = 0;
 
   let [miliSec, setMiliSec] = useState(0);
   let [sec, setSec] = useState(givenSeconds);
@@ -100,14 +102,23 @@ function App() {
   let timer;
 
   useEffect(() => {
+    console.log("Use effect run");
     timer = setInterval(() => {
       setMiliSec(miliSec - 1);
-
+      console.log({ miliSec });
       if (miliSec === 0) {
-        setSec(sec - 1);
-        setMiliSec(59);
+        if (sec == 0) {
+          console.log("SECOND ZERO");
+          setIndexNumber(indexNumber + 1);
+          setSec(10);
+          setQuestionsLimit(questionsLimit + 1);
+          setMiliSec(59);
+        } else {
+          setSec(sec - 1);
+          setMiliSec(59);
+        }
       }
-    }, 5);
+    }, 10);
 
     return () => clearInterval(timer);
   });
@@ -118,16 +129,18 @@ function App() {
   };
 
   let start = () => {
+    console.log("Start");
     setMiliSec(59);
     setSec(9);
     setShowQuestions(true);
   };
   let stop = () => {
+    console.log("Stop run");
     clearInterval(timer);
     setShowResult(true);
   };
   useEffect(() => {
-    if (sec === 0 && miliSec === 0) {
+    if (questionsLimit > questions.length) {
       stop();
     }
   });
@@ -141,6 +154,9 @@ function App() {
     } else {
       setIndexNumber(indexNumber + 1);
     }
+    setSec(10);
+    setQuestionsLimit(questionsLimit + 1);
+    setMiliSec(59);
   };
   // let next = () => {
   //   if (indexNumber + 1 === questions.length) {
@@ -155,8 +171,8 @@ function App() {
       style={{
         backgroundColor: "lightBlue",
         backgroundImage: `url('https://c4.wallpaperflare.com/wallpaper/123/958/393/hd-1080p-nature-download-1920x1200-wallpaper-preview.jpg')`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
         height: "100vh",
       }}
     >
